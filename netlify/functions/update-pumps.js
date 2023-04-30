@@ -1,10 +1,9 @@
 const dynamoService = require("../../support/dynamo-service");
 
 exports.handler = async function (event, _context) {
-  const body = event.body;
-  const { todo, position, uuid } = JSON.parse(body);
+  const pumps = event.multiValueQueryStringParameters.pumps;
 
-  await dynamoService.updateTodo(todo, position, uuid);
+  await dynamoService.updatePumps(pumps.join());
 
   return {
     statusCode: 201,

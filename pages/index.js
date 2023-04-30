@@ -1,22 +1,33 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { getPumps, updatePumps } from "@/support/pump-service";
 
 const initPumps = [0, 0, 0, 0];
 
 export default function Home() {
   const [pumps, setPumps] = useState([...initPumps]);
 
-  const pumpClickHandler = (index) => {
+  const pumpClickHandler = async (index) => {
+    const nextPumps = [...initPumps];
+
     if (!pumps[index]) {
-      if (confirm("Confirm you want to turn it on")) {
-        const tempPumps = [...initPumps];
-        tempPumps[index] = 1;
-        setPumps(tempPumps);
+      if (confirm("Confirm you want to turn it on")) {    
+        nextPumps[index] = 1;
+        
       }
-    } else {
-      setPumps([...initPumps]);
     }
+
+    setPumps(nextPumps);
+    await updatePumps(nextPumps.join(''))
   };
+
+  useEffect(() => {
+    getPumps().then((response) => {
+      const pumps = response.headers.get('_p2132')?.slice(0, 4) || "0000"
+      setPumps(pumps.split('').map(value => parseInt(value) || 0))
+    })
+  }, [])
 
   return (
     <>

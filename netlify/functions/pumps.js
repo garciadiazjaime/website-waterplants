@@ -1,16 +1,10 @@
-// const { getList } = require("../../support/dynamo-service");
-
-// const mapper = (items) => items.map(item => ({
-//   position: parseInt(item.position.N),
-//   todo: item.todo.S,
-//   uuid: item.uuid.S
-// }))
+const { getPumps } = require("../../support/dynamo-service");
 
 exports.handler = async function (event, _context) {
-  // const results = await getList();
+  const results = await getPumps();
+  const pumps = Array.isArray(results.Items) && results.Items[0].values?.S || "0000"
 
-  // const todos = mapper(results.Items).sort((a, b) => a.position - b.position)
-  const _p = "0000<<pumps";
+  const _p = `${pumps}<<pumps`;
 
   return {
     statusCode: 200,
