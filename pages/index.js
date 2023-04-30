@@ -24,7 +24,7 @@ export default function Home() {
 
   useEffect(() => {
     getPumps().then((response) => {
-      const pumps = response.headers.get('_p2132')?.slice(0, 4) || "0000"
+      const pumps = response.headers.get('_p')?.slice(0, 4) || "0000"
       setPumps(pumps.split('').map(value => parseInt(value) || 0))
     })
   }, [])
