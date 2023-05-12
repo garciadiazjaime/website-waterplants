@@ -2,7 +2,7 @@ const { getPumps } = require("../../support/dynamo-service");
 
 exports.handler = async function (event, _context) {
   const results = await getPumps();
-  const pumps = Array.isArray(results.Items) && results.Items[0].values?.S || "0000"
+  const pumps = Array.isArray(results.Items) && results.Items[0].values?.S || "000000000000"
 
   const _p = `${pumps}<<pumps`;
 

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import { getPumps, updatePumps } from "@/support/pump-service";
 
-const initPumps = [0, 0, 0, 0];
+const initPumps = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 export default function Home() {
   const [pumps, setPumps] = useState([...initPumps]);
@@ -24,8 +24,13 @@ export default function Home() {
 
   useEffect(() => {
     getPumps().then((response) => {
-      const pumps = response.headers.get('_p')?.slice(0, 4) || "0000"
-      setPumps(pumps.split('').map(value => parseInt(value) || 0))
+      const pumpsNewState = [...initPumps]
+      const header = response.headers.get('_p')
+      for(let i = 0; i < 12; i++) {
+        const pin = header[i]
+        pumpsNewState.push(parseInt(pin) ?  +pin : 0)
+      }
+      setPumps(pumpsNewState)
     })
   }, [])
 

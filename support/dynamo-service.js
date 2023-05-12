@@ -22,7 +22,7 @@ module.exports.updatePumps = (pumps) => {
       PutRequest: {
         Item: {
           id: { S: "1" },
-          pumps: { S: "2345" },
+          pumps: { S: "23456789ABCD" },
           values: { S: pumps },
           updated: { N: new Date().getTime().toString() },
         },
