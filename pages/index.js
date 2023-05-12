@@ -12,27 +12,26 @@ export default function Home() {
     const nextPumps = [...initPumps];
 
     if (!pumps[index]) {
-      if (confirm("Confirm you want to turn it on")) {    
+      if (confirm("Confirm you want to turn it on")) {
         nextPumps[index] = 1;
-        
       }
     }
 
     setPumps(nextPumps);
-    await updatePumps(nextPumps.join(''))
+    await updatePumps(nextPumps.join(""));
   };
 
   useEffect(() => {
     getPumps().then((response) => {
-      const pumpsNewState = [...initPumps]
-      const header = response.headers.get('_p')
-      for(let i = 0; i < 12; i++) {
-        const pin = header[i]
-        pumpsNewState.push(parseInt(pin) ?  +pin : 0)
+      const pumpsNewState = [...initPumps];
+      const header = response.headers.get("_p");
+      for (let i = 0; i < 12; i++) {
+        const pin = header[i];
+        pumpsNewState[i] = parseInt(pin) ? +pin : 0;
       }
-      setPumps(pumpsNewState)
-    })
-  }, [])
+      setPumps(pumpsNewState);
+    });
+  }, []);
 
   return (
     <>
