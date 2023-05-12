@@ -12,9 +12,11 @@ export default function Home() {
     const nextPumps = [...initPumps];
 
     if (!pumps[index]) {
-      if (confirm("Confirm you want to turn it on")) {
-        nextPumps[index] = 1;
+      if (!confirm("Confirm you want to turn it on")) {
+        return
       }
+
+      nextPumps[index] = 1
     }
 
     setPumps(nextPumps);

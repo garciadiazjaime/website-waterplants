@@ -1,8 +1,12 @@
 const { getPumps } = require("../../support/dynamo-service");
+const { getNewPumpState } = require('../../support/pump-service')
 
 exports.handler = async function (event, _context) {
   const results = await getPumps();
-  const pumps = Array.isArray(results.Items) && results.Items[0].values?.S || "000000000000"
+
+  const pumpsRaw = results.Items[0].values?.S
+
+  const pumps = getNewPumpState(pumpsRaw)
 
   const _p = `${pumps}<<pumps`;
 
@@ -10,7 +14,7 @@ exports.handler = async function (event, _context) {
     statusCode: 200,
     headers: {
       "Content-Type": "text/plain",
-      _p
+      _p,
     },
   };
 };
