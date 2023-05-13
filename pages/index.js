@@ -45,7 +45,7 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          {pumps.map((pum, index) => (
+          {pumps.slice(0, 10).map((pum, index) => (
             <div
               key={index}
               style={{
