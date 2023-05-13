@@ -8,7 +8,7 @@ exports.handler = async function (event, _context) {
   const pumpsRaw = results.Items[0].values?.S
 
   const pumps = getNewPumpState(pumpsRaw)
-  if (process.env.EMAIL_SERVICE_ENABLE === "true" && pumps === "000000000000") {
+  if (process.env.EMAIL_SERVICE_ENABLE === "true" && pumps !== "000000000000") {
     await sendEmail(pumps)
   }
   console.log(pumps)
