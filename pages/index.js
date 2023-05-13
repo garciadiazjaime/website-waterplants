@@ -60,7 +60,7 @@ export default function Home() {
               }}
               onClick={() => pumpClickHandler(index)}
             >
-              <span style={{ opacity: 0.7 }}>Pump {index + 1}</span>
+              <span style={{ opacity: 0.7 }}>Pump {index + 2}</span>
               <span>{pumps[index] ? `🟢` : `🔴`}</span>
             </div>
           ))}
