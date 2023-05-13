@@ -14,6 +14,7 @@ module.exports.sendEmail = async function (message) {
   };
   
   try {
+    console.log('email sent')
     await sgMail.send(msg);
   } catch (error) {
     console.log(msg)
