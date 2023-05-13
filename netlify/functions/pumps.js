@@ -7,6 +7,7 @@ exports.handler = async function (event, _context) {
   const pumpsRaw = results.Items[0].values?.S
 
   const pumps = getNewPumpState(pumpsRaw)
+  console.log(pumps)
 
   const _p = `${pumps}<<pumps`;
 
