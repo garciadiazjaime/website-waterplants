@@ -9,7 +9,7 @@ exports.handler = async function (event, _context) {
 
   const pumps = getNewPumpState(pumpsRaw)
   if (pumps === "000000000000") {
-    await sendEmail(pumps)
+    // await sendEmail(pumps)
   }
   console.log(pumps)
 
