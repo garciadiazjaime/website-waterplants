@@ -13,10 +13,10 @@ export default function Home() {
 
     if (!pumps[index]) {
       if (!confirm("Confirm you want to turn it on")) {
-        return
+        return;
       }
 
-      nextPumps[index] = 1
+      nextPumps[index] = 1;
     }
 
     setPumps(nextPumps);
@@ -60,7 +60,9 @@ export default function Home() {
               }}
               onClick={() => pumpClickHandler(index)}
             >
-              <span style={{ opacity: 0.7 }}>Pump {index + 2}</span>
+              <span style={{ opacity: 0.7 }}>
+                Pump {index + 1} {index === 2 && "X"}
+              </span>
               <span>{pumps[index] ? `🟢` : `🔴`}</span>
             </div>
           ))}

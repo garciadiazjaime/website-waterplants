@@ -1,10 +1,10 @@
 const sgMail = require("@sendgrid/mail");
-
+const logger = require("./logger")("plants-email");
 
 module.exports.sendEmail = async function (message) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-  const email = "info@mintitmedia.com"
+  const email = "info@mintitmedia.com";
   const msg = {
     text: message,
     html: message,
@@ -12,12 +12,11 @@ module.exports.sendEmail = async function (message) {
     from: email,
     to: email,
   };
-  
+
   try {
-    console.log('email sent')
+    logger.info("email sent");
     await sgMail.send(msg);
   } catch (error) {
-    console.log(msg)
-    console.log(JSON.stringify(error, null, 2))
+    logger.error(msg, error);
   }
 };
